@@ -32,10 +32,12 @@ class KafkaService  @Inject() (appConfig: Configuration, cs: CoordinatedShutdown
   }
 
   def saveAction(actionLabel: String, user: String): Unit = {
-    val action = Action(actionLabel, user, System.currentTimeMillis())
-    val actionJsonString = mapper.writeValueAsString(action)
-    val record = new ProducerRecord[String, String](s"actions-${actionLabel}", actionLabel, actionJsonString)
-    producer.send(record)
+    if (actionLabel.length > 2 && !user.isEmpty) {
+      val action = Action(actionLabel, user, System.currentTimeMillis())
+      val actionJsonString = mapper.writeValueAsString(action)
+      val record = new ProducerRecord[String, String](s"actions-${actionLabel}", actionLabel, actionJsonString)
+      producer.send(record)
+    }
   }
 
   def close(): Unit = {
