@@ -3,7 +3,7 @@ package models
 import com.typesafe.config.ConfigList
 import javax.inject.Inject
 
-import scala.jdk.CollectionConverters._
+import scala.collection.JavaConverters._
 
 class Configuration  @Inject() (config: play.api.Configuration) {
 
