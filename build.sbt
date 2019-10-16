@@ -3,7 +3,7 @@ organization := "com.purbon"
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file(".")).enablePlugins(PlayScala, DebianPlugin)
 
 scalaVersion := "2.12.7"
 
@@ -33,3 +33,13 @@ javaOptions in Test += "-Dcom.sun.management.jmxremote.local.only=false "
 javaOptions in Test += "-Dcom.sun.management.jmxremote.ssl=false"
 javaOptions in Test += "-Dcom.sun.management.jmxremote.authenticate=false"
 javaOptions in Test += "-Djava.rmi.server.hostname=0.0.0.0"
+
+maintainer in Linux := "Pere Urbon <pere@confluent.io>"
+
+packageSummary in Linux := "A slim kafka proxy"
+packageDescription := "My longer package description"
+
+rpmRelease := "1"
+rpmVendor := "purbon.com"
+rpmUrl := Some("https://github.com/purbon/slim-kafka-webaction-proxy")
+rpmLicense := Some("Apache v2")
